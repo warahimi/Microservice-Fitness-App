@@ -1,14 +1,20 @@
 package com.fitness.activity_service.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.fitness.activity_service.dto.ActivityRequest;
+import com.fitness.activity_service.dto.ActivityResponse;
+import com.fitness.activity_service.service.ActivityService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/activities")
+@RequiredArgsConstructor
 public class ActivityController {
-    @GetMapping("/test")
-    public String test() {
-        return "Activity Service is working!";
+    private final ActivityService activityService;
+    @PostMapping
+    public ResponseEntity<ActivityResponse> createActivity(@RequestBody ActivityRequest request) {
+        ActivityResponse response = activityService.createActivity(request);
+        return ResponseEntity.ok(response);
     }
 }
