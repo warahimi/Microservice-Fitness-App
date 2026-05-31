@@ -38,4 +38,21 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(error);
     }
+
+    @ExceptionHandler(ActivityNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleNotFound(
+            ActivityNotFoundException ex,
+            WebRequest request) {
+
+        ErrorMessage error = ErrorMessage.builder()
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .timestamp(LocalDateTime.now())
+                .message(ex.getMessage())
+                .errorType("ActivityNotFoundException")
+                .path(request.getDescription(false).replace("uri=", ""))
+                .details(null)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
 }
