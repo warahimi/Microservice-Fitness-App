@@ -1,0 +1,14 @@
+package com.fitness.activity_service.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/activities")
+public class ActivityController {
+    @GetMapping("/test")
+    public String test() {
+        return "Activity Service is working!";
+    }
+}
