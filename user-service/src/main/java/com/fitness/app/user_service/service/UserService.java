@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -97,5 +98,14 @@ public class UserService {
             throw new UserNotFoundException("User with email: "+ email+" not found");
         }
         return userToUserResponse(user.get());
+    }
+
+    public Boolean validateUserById(String userId) {
+        return userRepository.existsById(userId);
+    }
+
+    public List<UserResponse> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(this::userToUserResponse).toList();
     }
 }

@@ -1,6 +1,6 @@
 package com.fitness.activity_service.service;
 
-import com.fitness.activity_service.ActivityRepository;
+import com.fitness.activity_service.repository.ActivityRepository;
 import com.fitness.activity_service.dto.ActivityRequest;
 import com.fitness.activity_service.dto.ActivityResponse;
 import com.fitness.activity_service.exceptions.ActivityNotFoundException;
@@ -15,12 +15,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ActivityService {
     private final ActivityRepository activityRepository;
+    private final UserValidationService userValidationService;
     public ActivityResponse createActivity(ActivityRequest request) {
         Activity activity = maptoActivity(request);
         Activity savedActivity = activityRepository.save(activity);
         return mapToActivityResponse(savedActivity);
     }
     private Activity maptoActivity(ActivityRequest request) {
+        // Validate the use by id
+        if(!userValidationService.validateUserId(request.getUserId())) {
+            throw new IllegalArgumentException("Invalid user id: " + request.getUserId());
+        }
         return Activity.builder()
                 .userId(request.getUserId())
                 .type(request.getType())

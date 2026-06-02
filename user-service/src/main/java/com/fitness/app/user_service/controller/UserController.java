@@ -9,11 +9,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    @GetMapping
+    public ResponseEntity<List<UserResponse>> getAllUsers()
+    {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable String id)
     {
@@ -34,5 +42,12 @@ public class UserController {
     public ResponseEntity<UserResponse> saveUser(@Valid @RequestBody UserRequest userRequest)
     {
         return new ResponseEntity<>(userService.saveUser(userRequest), HttpStatus.CREATED);
+    }
+
+    // validate the user by userId
+    @GetMapping("/validate/{userId}")
+    public ResponseEntity<Boolean> validateUserById(@PathVariable String userId)
+    {
+        return ResponseEntity.ok(userService.validateUserById(userId));
     }
 }
