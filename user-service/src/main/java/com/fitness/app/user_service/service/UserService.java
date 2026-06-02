@@ -7,6 +7,7 @@ import com.fitness.app.user_service.exceptions.UserNotFoundException;
 import com.fitness.app.user_service.model.User;
 import com.fitness.app.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
     private final UserRepository userRepository;
     public UserResponse getUserById(String id) {
@@ -23,6 +25,7 @@ public class UserService {
         {
             throw new UserNotFoundException("User with user id: "+ id+" not found");
         }
+        log.info("Saved user: "+ user.get());
         return userToUserResponse(user.get());
 
     }
@@ -58,6 +61,9 @@ public class UserService {
         User user = userRequestToUser(userRequest);
 
         User savedUser = userRepository.save(user);
+        userRepository.flush(); // Force the persistence context to synchronize with the database immediately, to show the dates
+        //OR
+        //User savedUser = userRepository.saveAndFlush(user); // Save the user and flush changes immediately
 
         return userToUserResponse(savedUser);
     }
