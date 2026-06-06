@@ -14,7 +14,39 @@ spring:
       ddl-auto: update
     show-sql: true
 
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+# it creates Direct Exchange + Queue + Binding automatically when the Spring Boot app starts up,
+# based on the properties defined in application.yml. You can customize the exchange type and other
+# settings as needed.
+#spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+rabbitmq:
+  exchange:
+    name: activity-exchange
+
+  queue:
+    name: activity-queue
+
+  routing:
+    key: activity-created
+
+#This will produce properties like:
+
+# YAML	                    Property Key
+# rabbitmq.exchange.name	activity-exchange
+# rabbitmq.queue.name	    activity-queue
+# rabbitmq.routing.key	    activity-created
+# spring.rabbitmq.host	    localhost
+# spring.rabbitmq.port	    5672
+# spring.rabbitmq.username	guest
+# spring.rabbitmq.password	guest

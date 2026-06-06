@@ -28,4 +28,10 @@ public class RecommendationController {
     public ResponseEntity<RecommendationResponse> getRecommendationsForActivity(@PathVariable String activityId) {
         return ResponseEntity.ok(recommendationService.getRecommendationsForActivity(activityId));
     }
+
+    //get all recommendations
+    @GetMapping
+    public ResponseEntity<List<RecommendationResponse>> getAllRecommendations() {
+        return ResponseEntity.ok(recommendationService.getAllRecommendations());
+    }
 }
