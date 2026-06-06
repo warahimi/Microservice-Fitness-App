@@ -1,0 +1,50 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/fitnessdb?useSSL=false&serverTimezone=UTC
+    username: root
+    password: admin123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+# it creates Direct Exchange + Queue + Binding automatically when the Spring Boot app starts up,
+# based on the properties defined in application.yml. You can customize the exchange type and other
+# settings as needed.
+#spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+rabbitmq:
+  exchange:
+    name: activity-exchange
+
+  queue:
+    name: activity-queue
+
+  routing:
+    key: activity-created
+
+#This will produce properties like:
+
+# YAML	                    Property Key
+# rabbitmq.exchange.name	activity-exchange
+# rabbitmq.queue.name	    activity-queue
+# rabbitmq.routing.key	    activity-created
+# spring.rabbitmq.host	    localhost
+# spring.rabbitmq.port	    5672
+# spring.rabbitmq.username	guest
+# spring.rabbitmq.password	guest

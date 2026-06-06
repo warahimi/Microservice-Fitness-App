@@ -105,6 +105,13 @@
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit-stream</artifactId>
 		</dependency>
+
+		<!-- Config Server -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
