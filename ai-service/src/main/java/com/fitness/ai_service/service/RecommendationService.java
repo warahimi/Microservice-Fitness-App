@@ -44,4 +44,11 @@ public class RecommendationService {
             throw new RuntimeException("No recommendation found for activityId: " + activityId);
         }
     }
+
+    public List<RecommendationResponse> getAllRecommendations() {
+        List<Recommendation> allRecommendations = recommendationRepository.findAll();
+        return allRecommendations.stream()
+                .map(this::mapToRecoomendationResponse)
+                .toList();
+    }
 }

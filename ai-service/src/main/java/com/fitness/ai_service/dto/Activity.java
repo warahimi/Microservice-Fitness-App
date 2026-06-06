@@ -14,7 +14,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ActivityResponse {
+public class Activity {
     private String id;
     private String userId;
     private ActivityType type;
