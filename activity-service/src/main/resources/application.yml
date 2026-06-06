@@ -1,44 +1,46 @@
-server:
-  port: 8082
+#server:
+#  port: 8082
 
 spring:
   application:
     name: activity-service
-  datasource:
-    url: jdbc:mysql://localhost:3306/fitnessdb?useSSL=false&serverTimezone=UTC
-    username: root
-    password: admin123
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+  config:
+    import: optional:configserver:http://localhost:8888 # This tells Spring Boot to fetch configuration properties from the Config Server running at http://localhost:8888. The "optional:" prefix means that if the Config Server is not available, the application will still start up using default properties.
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/fitnessdb?useSSL=false&serverTimezone=UTC
+#    username: root
+#    password: admin123
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
 
 # it creates Direct Exchange + Queue + Binding automatically when the Spring Boot app starts up,
 # based on the properties defined in application.yml. You can customize the exchange type and other
 # settings as needed.
 #spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
 
-rabbitmq:
-  exchange:
-    name: activity-exchange
-
-  queue:
-    name: activity-queue
-
-  routing:
-    key: activity-created
+#rabbitmq:
+#  exchange:
+#    name: activity-exchange
+#
+#  queue:
+#    name: activity-queue
+#
+#  routing:
+#    key: activity-created
 
 #This will produce properties like:
 

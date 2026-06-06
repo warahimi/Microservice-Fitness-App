@@ -1,0 +1,41 @@
+
+server:
+  port: 8083
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/fitnessrecommendation
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+
+
+#spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+rabbitmq:
+  exchange:
+    name: activity-exchange
+
+  queue:
+    name: activity-queue
+
+  routing:
+    key: activity-created
+
+
+# Gemini API configuration
+# Externalize the API key to avoid hardcoding sensitive information in the codebase. You can set the environment variable GEMINI_API_KEY before running the application.
+# read the key from environment variable for better security
+gemini:
+  api:
+    key: ${GEMINI_API_KEY} #${GEMINI_API_KEY}
+    url: ${GEMINI_API_URL}
