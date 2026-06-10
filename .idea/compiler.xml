@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
         <module name="config-server" />
         <module name="user-service" />
         <module name="activity-service" />
@@ -19,6 +20,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="activity-service" options="-parameters" />
       <module name="ai-service" options="-parameters" />
+      <module name="api-gateway" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="user-service" options="-parameters" />

@@ -1,0 +1,7 @@
+
+
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: optional:configserver:http://localhost:8888 # This tells Spring Boot to fetch configuration properties from the Config Server running at http://localhost:8888. The "optional:" prefix means that if the Config Server is not available, the application will still start up using default properties.

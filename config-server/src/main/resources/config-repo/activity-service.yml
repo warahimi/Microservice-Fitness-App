@@ -17,6 +17,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true       # avoids the underscore-hostname issue
 
 # it creates Direct Exchange + Queue + Binding automatically when the Spring Boot app starts up,
 # based on the properties defined in application.yml. You can customize the exchange type and other
